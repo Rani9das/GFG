@@ -1,0 +1,28 @@
+class Solution:
+    def sumClosest(self, arr, k):
+        # Sort the array
+        arr.sort()
+        n = len(arr)
+        res = []
+        l, h = 0, n - 1
+        min_diff = float('inf')
+        
+        while l < h:
+            # Calculate the sum of the pair
+            total = arr[l] + arr[h]
+            curr_diff = abs(total - k)
+            
+            # Update the closest pair if needed
+            if curr_diff < min_diff:
+                min_diff = curr_diff
+                res = [arr[l], arr[h]]
+            
+            # Adjust pointers based on the sum
+            if total > k:
+                h -= 1
+            elif total < k:
+                l += 1
+            else:
+                return res  # Exact match
+        
+        return res
