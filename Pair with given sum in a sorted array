@@ -1,0 +1,36 @@
+class Solution:
+    def countPairs(self, arr, target):
+        # Initialize variables
+        ans = 0
+        i = 0
+        j = len(arr) - 1
+
+        while i < j:
+            total = arr[i] + arr[j]
+            if total < target:
+                i += 1
+            elif total > target:
+                j -= 1
+            else:
+                ele1 = arr[i]
+                ele2 = arr[j]
+                count1 = 0
+                count2 = 0
+
+                # Count occurrences of arr[i] (ele1)
+                while i <= j and arr[i] == ele1:
+                    i += 1
+                    count1 += 1
+
+                # Count occurrences of arr[j] (ele2)
+                while i <= j and arr[j] == ele2:
+                    j -= 1
+                    count2 += 1
+
+                # If the elements are the same
+                if ele1 == ele2:
+                    ans += count1 * (count1 - 1) // 2
+                else:
+                    ans += count1 * count2
+
+        return ans
